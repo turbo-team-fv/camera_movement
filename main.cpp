@@ -16,15 +16,25 @@ int main()
         exit(0);
     }
 
+   sf::Texture texmap;
+    if (!texmap.loadFromFile("resources/map.png"))
+    {
+        std::cerr << "Error cargando la imagen map.png";
+        exit(0);
+    }
+
     //Y creo el spritesheet a partir de la imagen anterior
     sf::Sprite sprite(tex);
 
-    sf::Sprite sprite(tex);
+    sf::Sprite spriteMap(texmap);
 
     //Le pongo el centroide donde corresponde
     sprite.setOrigin(75/2,75/2);
     //Cojo el sprite que me interesa por defecto del sheet
     sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
+
+
+
 
 
     // Lo dispongo en el centro de la pantalla
@@ -58,24 +68,25 @@ int main()
                             sprite.setTextureRect(sf::IntRect(0*75, 2*75, 75, 75));
                             //Escala por defecto
                             sprite.setScale(1,1);
-                            sprite.move(kVel,0);
+                            spriteMap.move(-kVel,0);
+//                                spriteMap.setOrigin(75/2,75/2);
                         break;
 
                         case sf::Keyboard::Left:
                             sprite.setTextureRect(sf::IntRect(0*75, 2*75, 75, 75));
                             //Reflejo vertical
                             sprite.setScale(-1,1);
-                            sprite.move(-kVel,0);
+                            spriteMap.move(kVel,0);
                         break;
 
                         case sf::Keyboard::Up:
                             sprite.setTextureRect(sf::IntRect(0*75, 3*75, 75, 75));
-                            sprite.move(0,-kVel);
+                            spriteMap.move(0,kVel);
                         break;
 
                         case sf::Keyboard::Down:
                             sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
-                            sprite.move(0,kVel);
+                            spriteMap.move(0,-kVel);
                         break;
 
 
@@ -96,7 +107,9 @@ int main()
         }
 
         window.clear();
-        window.draw(sprite);
+
+          window.draw(spriteMap);
+                  window.draw(sprite);
         window.display();
     }
 

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1551882810 source:/home/ramon/Desktop/FV/seguimiento_camara/main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+
