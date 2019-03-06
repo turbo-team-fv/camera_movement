@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#define kVel 5
+//#define kVel 5
 
 int main()
 {
@@ -34,7 +34,7 @@ int main()
     sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
 
 
-
+    int kVel = 5;
 
 
     // Lo dispongo en el centro de la pantalla
@@ -89,6 +89,12 @@ int main()
                             spriteMap.move(0,-kVel);
                         break;
 
+                        case sf::Keyboard::A:
+                            kVel++;
+                        break;
+                          case sf::Keyboard::S:
+                            kVel--;
+                        break;
 
                         //Tecla ESC para salir
                         case sf::Keyboard::Escape:
