@@ -16,7 +16,7 @@ int main()
         exit(0);
     }
 
-   sf::Texture texmap;
+    sf::Texture texmap;
     if (!texmap.loadFromFile("resources/map.png"))
     {
         std::cerr << "Error cargando la imagen map.png";
@@ -25,7 +25,6 @@ int main()
 
     //Y creo el spritesheet a partir de la imagen anterior
     sf::Sprite sprite(tex);
-
     sf::Sprite spriteMap(texmap);
 
     //Le pongo el centroide donde corresponde
@@ -33,6 +32,13 @@ int main()
     //Cojo el sprite que me interesa por defecto del sheet
     sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
 
+    // Vamo a ponerle un view sabroso
+    sf::View view;
+    view.reset(sf::FloatRect(100, 100, 400, 200));
+// Set its target viewport to be half of the window
+//view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
+// Apply it
+window.setView(view);
 
     int kVel = 5;
 
@@ -68,7 +74,7 @@ int main()
                             sprite.setTextureRect(sf::IntRect(0*75, 2*75, 75, 75));
                             //Escala por defecto
                             sprite.setScale(1,1);
-                            spriteMap.move(-kVel,0);
+                            sprite.move(kVel,0);
 //                                spriteMap.setOrigin(75/2,75/2);
                         break;
 
@@ -76,17 +82,17 @@ int main()
                             sprite.setTextureRect(sf::IntRect(0*75, 2*75, 75, 75));
                             //Reflejo vertical
                             sprite.setScale(-1,1);
-                            spriteMap.move(kVel,0);
+                            sprite.move(-kVel,0);
                         break;
 
                         case sf::Keyboard::Up:
                             sprite.setTextureRect(sf::IntRect(0*75, 3*75, 75, 75));
-                            spriteMap.move(0,kVel);
+                            sprite.move(0,-kVel);
                         break;
 
                         case sf::Keyboard::Down:
                             sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
-                            spriteMap.move(0,-kVel);
+                            sprite.move(0,kVel);
                         break;
 
                         case sf::Keyboard::A:
