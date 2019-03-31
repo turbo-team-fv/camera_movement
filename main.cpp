@@ -33,17 +33,15 @@ int main()
     sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
 // Lo dispongo en el centro de la pantalla
     sprite.setPosition(320, 240);
-
+    int kVel = 5;
 
     // Vamo a ponerle un view sabroso
     sf::View view;
+    // Pongo el view centrado en el jugador
     view.reset(sf::FloatRect(sprite.getPosition().x-200, sprite.getPosition().y-100, 400, 200));
-    // Set its target viewport to be half of the window
-    //view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
-    // Apply it
-    window.setView(view);
 
-    int kVel = 5;
+
+
 
 
 
@@ -53,6 +51,10 @@ int main()
     //Bucle del juego
     while (window.isOpen())
     {
+
+  // Posicionar camara donde el jugador
+//        std::cout<< sprite.getPosition().x<<sprite.getPosition().y <<std::endl;
+        view.setCenter(sprite.getPosition().x, sprite.getPosition().y);
 
         //Bucle de obtención de eventos
         sf::Event event;
@@ -119,13 +121,11 @@ int main()
             }
 
         }
-        // Posicionar camara donde el jugador
 
-        std::cout<< sprite.getPosition().x<<sprite.getPosition().y <<std::endl;
-        view.setCenter(sprite.getPosition().x,sprite.getPosition().y);
 
         window.clear();
-
+// Apply it
+    window.setView(view);
         window.draw(spriteMap);
         window.draw(sprite);
         window.display();
