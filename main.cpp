@@ -31,31 +31,33 @@ int main()
     sprite.setOrigin(75/2,75/2);
     //Cojo el sprite que me interesa por defecto del sheet
     sprite.setTextureRect(sf::IntRect(0*75, 0*75, 75, 75));
+// Lo dispongo en el centro de la pantalla
+    sprite.setPosition(320, 240);
+
 
     // Vamo a ponerle un view sabroso
     sf::View view;
-    view.reset(sf::FloatRect(100, 100, 400, 200));
-// Set its target viewport to be half of the window
-//view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
-// Apply it
-window.setView(view);
+    view.reset(sf::FloatRect(sprite.getPosition().x-200, sprite.getPosition().y-100, 400, 200));
+    // Set its target viewport to be half of the window
+    //view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
+    // Apply it
+    window.setView(view);
 
     int kVel = 5;
 
 
-    // Lo dispongo en el centro de la pantalla
-    sprite.setPosition(320, 240);
+
 
 
 
     //Bucle del juego
     while (window.isOpen())
     {
+
         //Bucle de obtención de eventos
         sf::Event event;
         while (window.pollEvent(event))
         {
-
             switch(event.type){
 
                 //Si se recibe el evento de cerrar la ventana la cierro
@@ -117,11 +119,15 @@ window.setView(view);
             }
 
         }
+        // Posicionar camara donde el jugador
+
+        std::cout<< sprite.getPosition().x<<sprite.getPosition().y <<std::endl;
+        view.setCenter(sprite.getPosition().x,sprite.getPosition().y);
 
         window.clear();
 
-          window.draw(spriteMap);
-                  window.draw(sprite);
+        window.draw(spriteMap);
+        window.draw(sprite);
         window.display();
     }
 
