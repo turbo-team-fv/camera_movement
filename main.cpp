@@ -124,7 +124,7 @@ int main()
 
 
         window.clear();
-// Apply it
+   // Apply it
     window.setView(view);
         window.draw(spriteMap);
         window.draw(sprite);
